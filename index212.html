@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Redirection</title>
+    
+</head>
+<body>
+    <form id="registrationForm">
+        <label for="username">Имя пользователя:</label>
+        <input type="text" id="username" name="username">
+        <br>
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password">
+        <br>
+        <input type="submit" value="Зарегистрироваться">
+      </form>
+
+      <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+          event.preventDefault();
+      
+          var username = document.getElementById('username').value;
+          var password = document.getElementById('password').value;
+      
+          if(username === "" || password === "") {
+            alert('Пожалуйста, заполните все поля');
+            return;
+          }
+      
+          var users = JSON.parse(localStorage.getItem('users')) || [];
+      
+          var existingUser = users.find(function(user) {
+            return user.username === username;
+          });
+      
+          if(existingUser) {
+            alert('Это имя пользователя уже занято');
+            return;
+          }
+      
+          users.push({
+            username: username,
+            password: password
+          });
+      
+          localStorage.setItem('users', JSON.stringify(users));
+      
+          alert('Регистрация прошла успешно!');
+        });
+      </script>
+</body>
+</html>
