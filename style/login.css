@@ -9,6 +9,7 @@
 body{
     background: url(../images/slide\ 1.png);
     background-size: cover;
+    background-position: center;
 }
 .background{
     width: 430px;
